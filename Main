@@ -1,0 +1,119 @@
+#include <stdio.h>
+#include<stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+#define MAX_PRODUCTS 10
+// Structure to store product details
+typedef struct {
+    char name[20];
+    float price;
+    int quantity;
+} Product;
+// Function to display available products
+void displayProducts(Product products[], int count) {
+	int i;
+    printf("Available Products:\n");
+    for ( i = 1; i <count; i++) {
+        printf("%d. %s (Rs%.2f) - Quantity: %d\n", i, products[i].name, products[i].price, products[i].quantity);
+    }
+    printf("9.Exit\n");
+}
+
+// Function to calculate and return change
+float calculateChange(float price, float money) {
+    money=money-price;
+	return money;
+}
+int main() {
+	void push();
+    Product products[MAX_PRODUCTS];
+    int numProducts = 9;  // Number of available products
+	int i;
+    // Initialize product data
+    strcpy(products[1].name, "Coke");
+    products[1].price = 20;
+    products[1].quantity = 5;
+
+    strcpy(products[2].name, "Pepsi");
+    products[2].price = 20;
+    products[2].quantity = 3;
+
+    strcpy(products[8].name, "Snicker");
+    products[8].price = 35;
+    products[8].quantity = 7;
+
+    strcpy(products[4].name, "Kinley water bottle");
+    products[4].price = 25;
+    products[4].quantity = 8;
+    
+    strcpy(products[5].name, "Bingo");
+    products[5].price = 20;
+    products[5].quantity = 9;
+    
+     strcpy(products[3].name, "Redbull");
+    products[3].price = 140;
+    products[3].quantity = 7;
+    
+     strcpy(products[7].name, "Monster");
+    products[7].price = 20;
+    products[7].quantity = 6;
+    
+     strcpy(products[6].name, "Kurkure");
+    products[6].price = 20;
+    products[6].quantity = 8;
+    
+    // strcpy(products[9].name, "KitKat");
+   // products[9].price = 35;//
+   // products[9].quantity = 6;//
+    
+     /*strcpy(products[9].name, "Dairy Milk");
+    products[9].price = 70;
+    products[9].quantity = 9;*/ 
+    //strcpy(products[10].name,"exit");//
+    displayProducts(products, numProducts);
+	int choice,e;
+     float money,change;
+    int num;
+    printf("\n**PRESS 9 TO EXIT\n");
+    printf("Enter money : ");
+     scanf("%f",&money);
+    do
+{
+	printf("Enter choice : ");
+	scanf("%d",&choice);
+	if(choice==9)
+	break;
+	if((choice>9)||(choice<1))
+	printf("Invalid choice \n");
+	else
+	{
+		printf("Enter quantity : ");
+		scanf("%d",&num);
+	 	if((num>(products[choice].quantity))){
+    	printf("Sorry the product is out of stock\n");
+    	printf("Change : Rs%.2f\n",money);
+    }
+    	else
+    	{
+    
+    		   float price = (products[choice].price)*num;
+    		if(money>=price){
+    			products[choice].quantity-=num;
+        		printf("Product: %s\tquantity : %d\n", products[choice].name,num);
+        		 change = calculateChange(price, money);
+        		printf("Change: Rs%.2f\n", change);
+        		money=change;
+			}
+			else
+			{
+				printf("The given money is insufficient.So please reneter accordingly\n");
+				printf("Change: Rs%.2f\n", money);
+			}
+		}
+	
+	}
+	
+}while(choice!=9);
+printf("Thank you\n");
+    return 0;
+}
